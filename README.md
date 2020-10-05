@@ -4,7 +4,7 @@
 
 **All datetimes you care for, at a glance.**
 
-<img src="https://i.imgur.com/cQXg73I.png"  width="700" />
+<img src="https://i.imgur.com/JIt8tQN.png"  width="500" />
 
 - [Timezone CLI](#timezone-cli)
   - [Usage](#usage)
