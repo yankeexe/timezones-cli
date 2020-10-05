@@ -2,6 +2,10 @@
 
 > Get local datetime from multiple timezones.
 
+**All datetimes you care for, at a glance.**
+
+<img src="https://i.imgur.com/cQXg73I.png"  width="700" />
+
 - [Timezone CLI](#timezone-cli)
   - [Usage](#usage)
     - [Installation](#installation)
