@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/kBi8mix.png" width="110" align="left"/><h1>Timezone CLI</h1>
+<img src="https://i.imgur.com/ZebplfT.png" width="110" align="left"/><h1>Timezone CLI</h1>
 <p>Get local datetime from multiple timezones.</p>
 
 <br>
