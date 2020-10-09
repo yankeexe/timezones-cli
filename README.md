@@ -1,6 +1,7 @@
-# Timezone CLI
+<img src="https://i.imgur.com/ZebplfT.png" width="110" align="left"/><h1>Timezone CLI</h1>
+<p>Get local datetime from multiple timezones.</p>
 
-> Get local datetime from multiple timezones.
+<br>
 
 **All datetimes you care for, at a glance.**
 
