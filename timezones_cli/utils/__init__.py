@@ -106,10 +106,10 @@ def extract_fuzzy_country_data(fuzzy_result: List) -> Tuple[str, str, str, str]:
     """
     country_data: NamedTuple = fuzzy_result[0]
 
-    name: str = getattr(country_data, "name", None)
-    alpha_2: str = getattr(country_data, "alpha_2", None)
-    alpha_3: str = getattr(country_data, "alpha_3", None)
-    official_name: str = getattr(country_data, "official_name", None)
+    name: str = getattr(country_data, "name", "")
+    alpha_2: str = getattr(country_data, "alpha_2", "")
+    alpha_3: str = getattr(country_data, "alpha_3", "")
+    official_name: str = getattr(country_data, "official_name", "")
 
     return name, official_name, alpha_2, alpha_3
 
