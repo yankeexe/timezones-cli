@@ -40,7 +40,8 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
 
     if not check_config():
         console.print(
-            "No configuration file found in your system.:x:\n", style="bold red"
+            "No configuration file found in your system.:x:\n",
+            style="bold red",
         )
         console.print(
             "Use `tz add` to create and add timezone to your config file.:memo:",
@@ -52,7 +53,9 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
         data: List = [line.rstrip() for line in file]
 
         if not len(data):
-            console.print("Config file contains no timezone:x:", style="bold red")
+            console.print(
+                "Config file contains no timezone:x:", style="bold red"
+            )
             sys.exit()
 
         if interactive:
@@ -99,7 +102,9 @@ def handle_interaction(data: List) -> str:
     return data[menu_entry_index]
 
 
-def extract_fuzzy_country_data(fuzzy_result: List) -> Tuple[str, str, str, str]:
+def extract_fuzzy_country_data(
+    fuzzy_result: List,
+) -> Tuple[str, str, str, str]:
     """
     Extract data from the Named tuple returned by
     fuzzy searching.
@@ -118,7 +123,7 @@ def get_local_time(timezones: List):
     """
     Get localtime based on passed timezones.
     """
-    headers: List = ["Timezone", "Local Date time"]
+    headers: List = ["Timezone", "Local Datetime"]
     rows: List = []
     for zone in timezones:
         validate_timezone(zone)

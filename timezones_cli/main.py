@@ -53,7 +53,7 @@ def search(query: str):
     """
     try:
         # Search with user query.
-        # TODO: Handle list with multiple data.
+        # @TODO: Handle list with multiple data.
         data: List = pycountry.countries.search_fuzzy(query)
 
         # extract alpha2 value
@@ -113,7 +113,10 @@ def add(timezone: str):
 @cli.command()
 @click.option("--name", "-n", help="Name of the timezone", type=str)
 @click.option(
-    "--interactive", "-i", help="Delete timezones in interactive mode.", is_flag=True
+    "--interactive",
+    "-i",
+    help="Delete timezones in interactive mode.",
+    is_flag=True,
 )
 def remove(name: Optional[str], interactive: bool):
     """
@@ -150,3 +153,23 @@ def select():
         entry.append(utils.handle_interaction(data))
 
         return utils.get_local_time(entry)
+
+
+@cli.command()
+@click.argument("time", required=True)
+@click.argument("timezone", required=True)
+def utc(time, timezone):
+    """
+    Convert a specific time from any timezone to UTC.
+
+    > Hours are calculated in 24 hours format. You can specify 'AM' or 'PM' if you are using 12 hours format.
+
+    EXAMPLE: \n
+
+    $ tz utc "8:15" "Asia/Kathmandu" # will be evaluated as AM, following the 24 hour format.
+
+    $ tz utc "20:15" "Asia/Kathmandu" # will be evaluated as PM, following the 24 hour format.
+
+    $ tz utc "8:15 PM" "Asia/Kathmandu" # will be evaluated as specified.
+    """
+    pass
