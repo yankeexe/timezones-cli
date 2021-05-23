@@ -1,6 +1,6 @@
 """ Entrypoint of the CLI """
 import sys
-
+import datetime
 from typing import List, Optional, Union
 
 import click
@@ -8,7 +8,12 @@ import pycountry
 from rich.console import Console
 
 from timezones_cli import utils
-from timezones_cli.utils import variables
+from timezones_cli.utils import (
+    validate_time,
+    validate_timezone,
+    variables,
+    get_utc_time,
+)
 
 
 console = Console()
@@ -172,4 +177,11 @@ def utc(time, timezone):
 
     $ tz utc "8:15 PM" "Asia/Kathmandu" # will be evaluated as specified.
     """
-    pass
+    try:
+        validate_timezone(timezone)
+        hour, minute = validate_time(time)
+    except Exception:
+        console.print("[bold red]:x:Invalid input value[/bold red]")
+        sys.exit(0)
+
+    return get_utc_time(hour, minute, timezone, time)
