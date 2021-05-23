@@ -173,15 +173,17 @@ def utc(time, timezone):
 
     $ tz utc "8:15" "Asia/Kathmandu" # will be evaluated as AM, following the 24 hour format.
 
-    $ tz utc "20:15" "Asia/Kathmandu" # will be evaluated as PM, following the 24 hour format.
+    $ tz utc "20:15" "Asia/Kathmandu" # will be evaluated as PM despite any suffix, following the 24 hour format.
 
     $ tz utc "8:15 PM" "Asia/Kathmandu" # will be evaluated as specified.
     """
     try:
         validate_timezone(timezone)
-        hour, minute = validate_time(time)
+        hour, minute, time_suffix = validate_time(time)
     except Exception:
         console.print("[bold red]:x:Invalid input value[/bold red]")
         sys.exit(0)
+
+    time = f"{str(hour).zfill(2)}:{str(minute).zfill(2)} {time_suffix}"
 
     return get_utc_time(hour, minute, timezone, time)

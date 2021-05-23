@@ -191,7 +191,7 @@ def print_help_msg(command):
         click.echo(command.get_help(ctx))
 
 
-def validate_time(time: str) -> Tuple[int, int]:
+def validate_time(time: str) -> Tuple[int, int, str]:
     """
     Validates time provided for converting to UTC.
 
@@ -235,7 +235,7 @@ def validate_time(time: str) -> Tuple[int, int]:
     if _hour < 12 and time_suffix == "PM":
         _hour = _hour + 12
 
-    return (_hour, _minute)
+    return (_hour, _minute, time_suffix)
 
 
 def get_utc_time(hour: int, minute: int, timezone: str, time: str):
@@ -257,8 +257,7 @@ def get_utc_time(hour: int, minute: int, timezone: str, time: str):
     utc_datetime = tz_aware.astimezone(pytz.utc)
 
     # Format only hour and minute value.
-    utc_time = utc_datetime.strftime("%H:%M")
-
+    utc_time = utc_datetime.strftime("%H:%M %p")
     console.print(
         tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
     )

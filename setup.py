@@ -24,7 +24,7 @@ requirements_dev = [
 
 setuptools.setup(
     name="timezones_cli",
-    version="0.1.0",
+    version="0.2.0",
     author="Yankee Maharjan",
     url="https://github.com/yankeexe/timezones-cli",
     description="Get local datetime from multiple timezones!",
