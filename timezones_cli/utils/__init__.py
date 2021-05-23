@@ -1,7 +1,8 @@
 """ Utils for sub commands """
+import re
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, time as time_obj, timezone
 from typing import List, NamedTuple, Optional, Tuple, Union
 
 import pytz
@@ -9,6 +10,7 @@ import click
 import pycountry
 from tabulate import tabulate
 from rich.console import Console
+from tzlocal import get_localzone
 from simple_term_menu import TerminalMenu
 
 from timezones_cli.utils import variables
@@ -40,7 +42,8 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
 
     if not check_config():
         console.print(
-            "No configuration file found in your system.:x:\n", style="bold red"
+            "No configuration file found in your system.:x:\n",
+            style="bold red",
         )
         console.print(
             "Use `tz add` to create and add timezone to your config file.:memo:",
@@ -52,7 +55,9 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
         data: List = [line.rstrip() for line in file]
 
         if not len(data):
-            console.print("Config file contains no timezone:x:", style="bold red")
+            console.print(
+                "Config file contains no timezone:x:", style="bold red"
+            )
             sys.exit()
 
         if interactive:
@@ -99,7 +104,9 @@ def handle_interaction(data: List) -> str:
     return data[menu_entry_index]
 
 
-def extract_fuzzy_country_data(fuzzy_result: List) -> Tuple[str, str, str, str]:
+def extract_fuzzy_country_data(
+    fuzzy_result: List,
+) -> Tuple[str, str, str, str]:
     """
     Extract data from the Named tuple returned by
     fuzzy searching.
@@ -118,7 +125,7 @@ def get_local_time(timezones: List):
     """
     Get localtime based on passed timezones.
     """
-    headers: List = ["Timezone", "Local Date time"]
+    headers: List = ["Timezone", "Local Datetime"]
     rows: List = []
     for zone in timezones:
         validate_timezone(zone)
@@ -162,12 +169,15 @@ def get_timezones(country_code: str) -> List:
 def validate_timezone(timezone: str) -> bool:
     """
     Validate timezone passed.
+
+    Args:
+        timezone: timezone string. Example: "Asia/Kathmandu"
     """
     try:
         pytz.timezone(timezone)
     except pytz.UnknownTimeZoneError:
         console.print(
-            f"[bold green]Invalid timezone name:[/bold green] [bold red]{timezone}:x:[/bold red]"
+            f"[bold green]:x:Invalid timezone:[/bold green] [bold red]{timezone}[/bold red]"
         )
         sys.exit()
 
@@ -180,3 +190,91 @@ def print_help_msg(command):
     """
     with click.Context(command) as ctx:
         click.echo(command.get_help(ctx))
+
+
+def validate_time(time: str) -> Tuple[int, int, str]:
+    """
+    Validates time provided for converting to UTC.
+
+    Args:
+        time: time value provided by the user. Format: "HH:MM"
+    """
+    # Check if empty string has been sent as a time value.
+    if not time.strip():
+        console.print("[bold red]:x:No time data sent.[/bold red]")
+        sys.exit(0)
+
+    time_break_down = time.split(":")
+    hour = time_break_down[0]
+    minute = time_break_down[1]
+
+    # Find integer value from the provided time string.
+    _minute = re.findall(r"-?\d+\.?\d*", minute)
+    _hour = re.findall(r"-?\d+\.?\d*", hour)
+
+    # Error if no integer value is provided for time.
+    if not _minute or not _hour:
+        console.print("[bold red]:x:Invalid time value[/bold red]")
+        sys.exit(0)
+
+    _hour = int(_hour.pop())
+    _minute = int(_minute.pop())
+
+    # Check if provided time values are within limit.
+    try:
+        time_obj(hour=_hour, minute=_minute)
+    except (ValueError, TypeError):
+        console.print("[bold red]:x:Invalid time value[/bold red]")
+        sys.exit(0)
+
+    if "PM" in minute or _hour >= 12:
+        time_suffix = "PM"
+    else:
+        time_suffix = "AM"
+
+    # Convert 12 hour format to 24 hours.
+    if _hour < 12 and time_suffix == "PM":
+        _hour = _hour + 12
+
+    return (_hour, _minute, time_suffix)
+
+
+def get_utc_time(hour: int, minute: int, timezone: str, time: str):
+    """
+    Return UTC time based on time and timezone.
+
+    Args:
+        hour: hour value of specified timezone.
+        minute: minute value of specified timezone.
+        timezone: specified timezone where hour and minute value belong to.
+        time: user specified time.
+    """
+    headers = ["Time Zone", "Local Time", "UTC Time"]
+    tz = pytz.timezone(timezone)
+    datetime_object = datetime.now().replace(hour=hour, minute=minute)
+
+    # Create timezone aware datetime object.
+    tz_aware = tz.localize(datetime_object)
+    utc_datetime = tz_aware.astimezone(pytz.utc)
+
+    # Format only hour and minute value.
+    utc_time = utc_datetime.strftime("%H:%M %p")
+    console.print(
+        tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
+    )
+
+
+def get_local_utc_time():
+    """
+    Return UTC time based on current local time.
+    """
+    headers = ["Time Zone", "Local Time", "UTC Time"]
+    time = datetime.now().time().strftime("%H:%M %p")
+    dt = datetime.utcnow()
+    utc_time = dt.strftime("%H:%M %p")
+    timezone = get_localzone().zone
+
+    console.print(
+        tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
+    )
+    sys.exit()

@@ -1,6 +1,6 @@
 """ Entrypoint of the CLI """
 import sys
-
+import datetime
 from typing import List, Optional, Union
 
 import click
@@ -8,7 +8,13 @@ import pycountry
 from rich.console import Console
 
 from timezones_cli import utils
-from timezones_cli.utils import variables
+from timezones_cli.utils import (
+    validate_time,
+    validate_timezone,
+    variables,
+    get_utc_time,
+    get_local_utc_time,
+)
 
 
 console = Console()
@@ -53,7 +59,7 @@ def search(query: str):
     """
     try:
         # Search with user query.
-        # TODO: Handle list with multiple data.
+        # @TODO: Handle list with multiple data.
         data: List = pycountry.countries.search_fuzzy(query)
 
         # extract alpha2 value
@@ -113,7 +119,10 @@ def add(timezone: str):
 @cli.command()
 @click.option("--name", "-n", help="Name of the timezone", type=str)
 @click.option(
-    "--interactive", "-i", help="Delete timezones in interactive mode.", is_flag=True
+    "--interactive",
+    "-i",
+    help="Delete timezones in interactive mode.",
+    is_flag=True,
 )
 def remove(name: Optional[str], interactive: bool):
     """
@@ -150,3 +159,37 @@ def select():
         entry.append(utils.handle_interaction(data))
 
         return utils.get_local_time(entry)
+
+
+@cli.command()
+@click.argument("time", required=False)
+@click.argument("timezone", required=False)
+def utc(time, timezone):
+    """
+    Convert a specific time from any timezone to UTC.
+
+    > Hours are calculated in 24 hours format. You can specify 'AM' or 'PM' if you are using 12 hours format.
+
+    EXAMPLE: \n
+
+    $ tz utc # show current system time in UTC.
+
+    $ tz utc "8:15" "Asia/Kathmandu" # will be evaluated as AM, following the 24 hour format.
+
+    $ tz utc "20:15" "Asia/Kathmandu" # will be evaluated as PM despite any suffix, following the 24 hour format.
+
+    $ tz utc "8:15 PM" "Asia/Kathmandu" # will be evaluated as specified.
+    """
+    if not time or not timezone:
+        get_local_utc_time()
+
+    try:
+        validate_timezone(timezone)
+        hour, minute, time_suffix = validate_time(time)
+    except Exception:
+        console.print("[bold red]:x:Invalid input value[/bold red]")
+        sys.exit(0)
+
+    time = f"{str(hour).zfill(2)}:{str(minute).zfill(2)} {time_suffix}"
+
+    return get_utc_time(hour, minute, timezone, time)
