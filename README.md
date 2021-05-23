@@ -1,4 +1,5 @@
 <img src="https://i.imgur.com/ZebplfT.png" width="110" align="left"/><h1>Timezone CLI</h1>
+
 <p>Get local datetime from multiple timezones.</p>
 
 <br>
@@ -15,6 +16,7 @@
     - [Remove timezones](#remove-timezones)
     - [Show local datetime of all saved timezones](#show-local-datetime-of-all-saved-timezones)
     - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
+    - [Get UTC Time](#get-utc-time)
   - [Contributing](#contributing)
 
 ## Usage
@@ -96,6 +98,33 @@ $ tz select
 
 ---
 
+### Get UTC time
+
+Get UTC time based on current system time.
+
+> **tz utc --help**
+
+```bash
+$ tz utc
+```
+
+Get UTC time based on specified time and timezone.
+
+```bash
+$ tz utc <time> <timezone>
+
+$ tz utc "11:45PM" "Asia/Kathmandu"
+```
+
+<details><summary><strong>Demo</strong></summary>
+
+<img src = "https://i.imgur.com/8hjy1XP.gif" width="500" alt="demo of timezone cli select" />
+</details>
+
 ## Contributing
 
 For guidance on setting up a development environment and how to make a contribution to `timezones-cli`, see the [contributing guidelines](https://github.com/yankeexe/timezones-cli/blob/master/CONTRIBUTING.md).
+
+```
+
+```

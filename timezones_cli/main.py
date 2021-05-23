@@ -13,6 +13,7 @@ from timezones_cli.utils import (
     validate_timezone,
     variables,
     get_utc_time,
+    get_local_utc_time,
 )
 
 
@@ -161,8 +162,8 @@ def select():
 
 
 @cli.command()
-@click.argument("time", required=True)
-@click.argument("timezone", required=True)
+@click.argument("time", required=False)
+@click.argument("timezone", required=False)
 def utc(time, timezone):
     """
     Convert a specific time from any timezone to UTC.
@@ -171,12 +172,17 @@ def utc(time, timezone):
 
     EXAMPLE: \n
 
+    $ tz utc # show current system time in UTC.
+
     $ tz utc "8:15" "Asia/Kathmandu" # will be evaluated as AM, following the 24 hour format.
 
     $ tz utc "20:15" "Asia/Kathmandu" # will be evaluated as PM despite any suffix, following the 24 hour format.
 
     $ tz utc "8:15 PM" "Asia/Kathmandu" # will be evaluated as specified.
     """
+    if not time or not timezone:
+        get_local_utc_time()
+
     try:
         validate_timezone(timezone)
         hour, minute, time_suffix = validate_time(time)

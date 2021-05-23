@@ -12,6 +12,7 @@ requirements = [
     "pycountry",
     "pytz",
     "simple-term-menu",
+    "tzlocal",
 ]
 
 # Development Requirements

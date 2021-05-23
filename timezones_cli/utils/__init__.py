@@ -2,7 +2,7 @@
 import re
 import os
 import sys
-from datetime import datetime, time as time_obj
+from datetime import datetime, time as time_obj, timezone
 from typing import List, NamedTuple, Optional, Tuple, Union
 
 import pytz
@@ -10,6 +10,7 @@ import click
 import pycountry
 from tabulate import tabulate
 from rich.console import Console
+from tzlocal import get_localzone
 from simple_term_menu import TerminalMenu
 
 from timezones_cli.utils import variables
@@ -176,7 +177,7 @@ def validate_timezone(timezone: str) -> bool:
         pytz.timezone(timezone)
     except pytz.UnknownTimeZoneError:
         console.print(
-            f"[bold green]Invalid timezone name:[/bold green] [bold red]{timezone}:x:[/bold red]"
+            f"[bold green]:x:Invalid timezone:[/bold green] [bold red]{timezone}[/bold red]"
         )
         sys.exit()
 
@@ -261,3 +262,19 @@ def get_utc_time(hour: int, minute: int, timezone: str, time: str):
     console.print(
         tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
     )
+
+
+def get_local_utc_time():
+    """
+    Return UTC time based on current local time.
+    """
+    headers = ["Time Zone", "Local Time", "UTC Time"]
+    time = datetime.now().time().strftime("%H:%M %p")
+    dt = datetime.utcnow()
+    utc_time = dt.strftime("%H:%M %p")
+    timezone = get_localzone().zone
+
+    console.print(
+        tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
+    )
+    sys.exit()
