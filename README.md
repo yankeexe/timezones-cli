@@ -1,7 +1,11 @@
 <img src="https://i.imgur.com/ZebplfT.png" width="110" align="left"/><h1>Timezone CLI</h1>
 
 <p>Get local datetime from multiple timezones.</p>
-
+<p>
+<img src="https://img.shields.io/pypi/v/timezones-cli" />
+<img src="https://img.shields.io/pypi/pyversions/timezones-cli" />
+<img src="https://img.shields.io/pypi/l/timezones-cli" />
+</p>
 <br>
 
 **All datetimes you care for, at a glance.**
