@@ -12,16 +12,17 @@
 
 <img src="https://i.imgur.com/JIt8tQN.png"  width="500" />
 
-- [Timezone CLI](#timezone-cli)
-  - [Usage](#usage)
-    - [Installation](#installation)
-    - [Search for local date time](#search-for-local-date-time)
-    - [Add timezones](#add-timezones)
-    - [Remove timezones](#remove-timezones)
-    - [Show local datetime of all saved timezones](#show-local-datetime-of-all-saved-timezones)
-    - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
-    - [Get UTC Time](#get-utc-time)
-  - [Contributing](#contributing)
+- [Usage](#usage)
+  - [Installation](#installation)
+  - [Search for local date time](#search-for-local-date-time)
+  - [Add timezones](#add-timezones)
+- [</details>](#details)
+  - [Remove timezones](#remove-timezones)
+  - [Show local datetime of all saved timezones](#show-local-datetime-of-all-saved-timezones)
+- [</details>](#details-1)
+  - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
+  - [Get UTC time](#get-utc-time)
+- [Contributing](#contributing)
 
 ## Usage
 
@@ -30,6 +31,8 @@
 ```bash
   $ pip3 install timezones-cli
 ```
+
+> **NOTE:** [List of country codes or timezone names](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) :earth_asia:
 
 ### Search for local date time
 
