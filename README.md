@@ -15,6 +15,7 @@
 - [Usage](#usage)
   - [Installation](#installation)
   - [Search for local date time](#search-for-local-date-time)
+  - [Search based on timezone abbreviations](#search-based-on-timezone-abbreviations)
   - [Add timezones](#add-timezones)
 - [</details>](#details)
   - [Remove timezones](#remove-timezones)
@@ -43,6 +44,25 @@ $ tz search "us"
 <details><summary><strong>Demo</strong></summary>
 
 <img src = "https://i.imgur.com/D2bcHG2.gif" width="700" alt="demo of timezone cli search" />
+</details>
+
+---
+
+### Search based on timezone abbreviations
+
+```bash
+$ tz get "pst"
+
+$ tz get "ist"
+
+$ tz get "est"
+
+$ tz get "cst"
+```
+
+<details><summary><strong>Demo</strong></summary>
+
+<img src = "https://i.imgur.com/TDRAphV.gif" width="700" alt="demo of timezone cli search" />
 </details>
 
 ---
@@ -131,7 +151,3 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 ## Contributing
 
 For guidance on setting up a development environment and how to make a contribution to `timezones-cli`, see the [contributing guidelines](https://github.com/yankeexe/timezones-cli/blob/master/CONTRIBUTING.md).
-
-```
-
-```

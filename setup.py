@@ -1,7 +1,6 @@
 """Package setup"""
 import setuptools
 
-
 with open("README.md", "r") as f:
     long_description = f.read()
 
@@ -25,14 +24,12 @@ requirements_dev = [
 
 setuptools.setup(
     name="timezones_cli",
-    version="0.2.0",
+    version="0.2.1-beta-1",
     author="Yankee Maharjan",
     url="https://github.com/yankeexe/timezones-cli",
     description="Get local datetime from multiple timezones!",
     license="MIT",
-    packages=setuptools.find_packages(
-        exclude=["dist", "build", "*.egg-info", "tests"]
-    ),
+    packages=setuptools.find_packages(exclude=["dist", "build", "*.egg-info", "tests"]),
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=requirements,
