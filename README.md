@@ -37,8 +37,12 @@
 
 ### Search for local date time
 
+You can use short country code like 'AE', 'RU', 'US' and so on.
+
 ```bash
 $ tz search "us"
+
+$ tz search "Nepal"
 ```
 
 <details><summary><strong>Demo</strong></summary>
@@ -62,7 +66,7 @@ $ tz get "cst"
 
 <details><summary><strong>Demo</strong></summary>
 
-<img src = "https://i.imgur.com/TDRAphV.gif" width="700" alt="demo of timezone cli search" />
+<img src = "https://i.imgur.com/2xNhV08.gif" width="700" alt="demo of timezone cli search" />
 </details>
 
 ---
