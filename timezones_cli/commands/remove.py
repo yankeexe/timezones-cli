@@ -1,14 +1,12 @@
 """
 Sub command to remove saved timezones from config file.
 """
-import click
 from typing import Optional
-from timezones_cli.utils import (
-    console,
-    validate_timezone,
-    remove_timezone,
-    print_help_msg,
-)
+
+import click
+
+from timezones_cli.utils import (console, print_help_msg, remove_timezone,
+                                 validate_timezone)
 
 
 @click.command()

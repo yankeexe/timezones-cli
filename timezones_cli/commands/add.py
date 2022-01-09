@@ -2,15 +2,12 @@
 Sub command to add timezones for quick glance.
 """
 
-import click
 from typing import List
 
-from timezones_cli.utils import (
-    variables,
-    console,
-    validate_timezone,
-    check_config,
-)
+import click
+
+from timezones_cli.utils import (check_config, console, validate_timezone,
+                                 variables)
 
 
 @click.command()

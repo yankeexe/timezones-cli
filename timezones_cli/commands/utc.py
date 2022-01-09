@@ -2,15 +2,11 @@
 Sub command to get UTC times
 """
 import sys
+
 import click
 
-from timezones_cli.utils import (
-    get_local_utc_time,
-    get_utc_time,
-    validate_time,
-    validate_timezone,
-    console,
-)
+from timezones_cli.utils import (console, get_local_utc_time, get_utc_time,
+                                 validate_time, validate_timezone)
 
 
 @click.command()

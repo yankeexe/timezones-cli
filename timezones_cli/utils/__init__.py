@@ -122,17 +122,23 @@ def extract_fuzzy_country_data(
     return name, official_name, alpha_2, alpha_3
 
 
-def get_local_time(timezones: List, query: Optional[str]=None):
+def get_local_time(timezones: List, query: Optional[str] = None, toggle=False):
     """
     Get localtime based on passed timezones.
     """
+    hours = "H" if toggle else "I"
     headers: List = ["Timezone", "Local Datetime"]
     rows: List = []
     for zone in timezones:
         validate_timezone(zone)
         timezone = pytz.timezone(zone)
         time_data = datetime.now(timezone)
-        rows.append((TIMEZONES.get(query, zone), time_data.strftime("%B %Y %A %I:%M:%S %p")))
+        rows.append(
+            (
+                TIMEZONES.get(query, zone),
+                time_data.strftime(f"%B %Y %A %{hours}:%M:%S %p"),
+            )
+        )
 
     console.print(tabulate(rows, headers, tablefmt="fancy_grid"))
 

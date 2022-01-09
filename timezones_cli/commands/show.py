@@ -2,19 +2,24 @@
 Sub command to show datetime from saved timezones.
 """
 import sys
-from typing import Union, List
+from typing import List, Union
 
 import click
-from timezones_cli.utils import (
-    console,
-    get_system_time,
-    get_local_time,
-    check_config as check_configuration,
-)
+
+from timezones_cli.utils import check_config as check_configuration
+from timezones_cli.utils import console, get_local_time, get_system_time
 
 
 @click.command()
-def show():
+@click.option(
+    "--toggle",
+    "-t",
+    help="Toggle for 24 hours format",
+    type=bool,
+    default=False,
+    is_flag=True,
+)
+def show(toggle: bool):
     """
     Show time based on the defaults at .tz-cli file.
     """
@@ -36,4 +41,4 @@ def show():
         )
         sys.exit()
 
-    return get_local_time(check_config)
+    return get_local_time(check_config, toggle=toggle)

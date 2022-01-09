@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from zoneinfo import ZoneInfo, available_timezones
 
 import click
+from click.core import Option
 from rich.console import Console
 
 from timezones_cli.utils import get_local_time
@@ -12,7 +13,15 @@ console = Console()
 
 @click.command()
 @click.argument("query")
-def get(query: str):
+@click.option(
+    "--toggle",
+    "-t",
+    help="Toggle for 24 hours format",
+    type=bool,
+    default=False,
+    is_flag=True,
+)
+def get(query: str, toggle: bool):
     now = dt.utcnow()
     tz_abbrev = lambda tz: ZoneInfo(tz).tzname(now)
     tz_map = defaultdict(list)
@@ -23,7 +32,7 @@ def get(query: str):
 
     try:
         data = tz_map[query.upper()]
-        get_local_time([data[0]], query.upper())
+        get_local_time([data[0]], query.upper(), toggle)
     except KeyError:
         console.print(
             f"[bold red]:x: Could not find datetime for query: [green]{query}[/green][/bold red]"

@@ -2,12 +2,21 @@
 Sub command to select timezone from config file.
 """
 import click
-from timezones_cli.utils import variables
-from timezones_cli.utils import console, handle_interaction, get_local_time
+
+from timezones_cli.utils import (console, get_local_time, handle_interaction,
+                                 variables)
 
 
 @click.command()
-def select():
+@click.option(
+    "--toggle",
+    "-t",
+    help="Toggle for 24 hours format",
+    type=bool,
+    default=False,
+    is_flag=True,
+)
+def select(toggle: bool):
     """
     Interactively select the timezone from your config file to get local time.
     """
@@ -22,4 +31,4 @@ def select():
 
         entry.append(handle_interaction(data))
 
-        return get_local_time(entry)
+        return get_local_time(entry, toggle=toggle)
