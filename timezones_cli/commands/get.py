@@ -23,7 +23,7 @@ def get(query: str):
 
     try:
         data = tz_map[query.upper()]
-        get_local_time([data[0]])
+        get_local_time([data[0]], query.upper())
     except KeyError:
         console.print(
             f"[bold red]:x: Could not find datetime for query: [green]{query}[/green][/bold red]"

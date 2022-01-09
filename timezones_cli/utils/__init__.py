@@ -1,19 +1,22 @@
 """ Utils for sub commands """
-import re
 import os
+import re
 import sys
-from datetime import datetime, time as time_obj, timezone
+from datetime import datetime
+from datetime import time as time_obj
+from datetime import timezone
 from typing import List, NamedTuple, Optional, Tuple, Union
 
-import pytz
 import click
 import pycountry
-from tabulate import tabulate
+import pytz
 from rich.console import Console
-from tzlocal import get_localzone
 from simple_term_menu import TerminalMenu
+from tabulate import tabulate
+from tzlocal import get_localzone
 
 from timezones_cli.utils import variables
+from timezones_cli.utils.abbreviations import TIMEZONES
 
 console = Console()
 
@@ -55,9 +58,7 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
         data: List = [line.rstrip() for line in file]
 
         if not len(data):
-            console.print(
-                "Config file contains no timezone:x:", style="bold red"
-            )
+            console.print("Config file contains no timezone:x:", style="bold red")
             sys.exit()
 
         if interactive:
@@ -121,7 +122,7 @@ def extract_fuzzy_country_data(
     return name, official_name, alpha_2, alpha_3
 
 
-def get_local_time(timezones: List):
+def get_local_time(timezones: List, query: Optional[str]=None):
     """
     Get localtime based on passed timezones.
     """
@@ -131,7 +132,7 @@ def get_local_time(timezones: List):
         validate_timezone(zone)
         timezone = pytz.timezone(zone)
         time_data = datetime.now(timezone)
-        rows.append((zone, time_data.strftime("%B %Y %A %I:%M:%S %p")))
+        rows.append((TIMEZONES.get(query, zone), time_data.strftime("%B %Y %A %I:%M:%S %p")))
 
     console.print(tabulate(rows, headers, tablefmt="fancy_grid"))
 
