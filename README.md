@@ -35,6 +35,8 @@
 
 > **NOTE:** [List of country codes or timezone names](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) :earth_asia:
 
+> **Use `-t` flag to toggle 24 hours format.**
+
 ### Search for local date time
 
 You can use short country code like 'AE', 'RU', 'US' and so on.
