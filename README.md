@@ -23,6 +23,7 @@
 - [</details>](#details-1)
   - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
   - [Get UTC time](#get-utc-time)
+- [Run using Docker (WIP)](#run-using-docker-wip)
 - [Contributing](#contributing)
 
 ## Usage
@@ -152,6 +153,21 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 <details><summary><strong>Demo</strong></summary>
 
 <img src = "https://i.imgur.com/8hjy1XP.gif" width="500" alt="demo of timezone cli select" />
+</details>
+
+## Run using Docker (WIP)
+
+Use the `make run` command followed by the command you want to run against the `tz` binary.
+
+> Note: Upload to Docker Hub.
+
+```bash
+$ make run cmd="get ist"
+```
+
+<details><summary><strong>Demo</strong></summary>
+
+<img src = "https://i.imgur.com/t8RgJqg.png" width="500" alt="demo of timezone cli with Docker" />
 </details>
 
 ## Contributing

@@ -2,9 +2,21 @@ SHELL :=/bin/bash
 CWD := $(PWD)
 TMP_PATH := $(CWD)/.tmp
 VENV_PATH := $(CWD)/venv
+docker_image := timezones-cli
 
 .PHONY: test clean
 .DEFAULT_GOAL=help
+
+build:
+	@docker build -t $(docker_image) .
+
+build.if:
+	@if [ "$$(docker images -q $(docker_image) 2> /dev/null)" = "" ]; then \
+		$(MAKE) -s build; \
+	fi
+
+run: build.if
+	@docker run --rm timezones-cli $(cmd)
 
 clean: # Clean temporary files
 	@rm -rf $(TMP_PATH) __pycache__ .pytest_cache
