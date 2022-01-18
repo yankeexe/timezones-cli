@@ -156,10 +156,17 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 </details>
 
 ## Run using Docker (WIP)
-
-Use the `make run` command followed by the command you want to run against the `tz` binary.
-
 > Note: Upload to Docker Hub.
+
+Create a config file manually first.
+
+```bash
+$ touch ~/.tz-cli
+
+$ docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli search us
+```
+
+For local debugging: Use the `make run` command followed by the command you want to run against the `tz` binary.
 
 ```bash
 $ make run cmd="get ist"

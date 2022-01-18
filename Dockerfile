@@ -1,16 +1,31 @@
-FROM python:3.9-slim-buster
+FROM python:3.9-slim-buster as build
+
+RUN useradd -ms /bin/bash tz
+
+USER tz
+
+WORKDIR /home/tz
+
+COPY --chown=tz:tz . .
+
+RUN python setup.py bdist_wheel
+
+
+FROM python:3.9-alpine
 
 LABEL description="Get local datetime from multiple timezones!"
 
-RUN useradd -ms /bin/bash timekeeper
+RUN apk update && apk add ncurses && \
+    addgroup -S tz && adduser -S tz -u 1000
 
-USER timekeeper
+USER tz
 
-WORKDIR /home/timekeeper
+WORKDIR /home/tz
 
-ENV PATH=$PATH:/home/timekeeper/.local/bin
+ENV PATH=$PATH:/home/tz/.local/bin
 
-RUN pip install --upgrade pip && \
-    pip install --upgrade --user --no-cache-dir timezones-cli
+COPY --from=build --chown=tz /home/tz/dist /home/tz/dist/
+
+RUN pip install --no-cache-dir --user dist/*.whl
 
 ENTRYPOINT [ "tz" ]

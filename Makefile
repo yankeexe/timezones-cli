@@ -4,7 +4,7 @@ TMP_PATH := $(CWD)/.tmp
 VENV_PATH := $(CWD)/venv
 docker_image := timezones-cli
 
-.PHONY: test clean
+.PHONY: test clean build
 .DEFAULT_GOAL=help
 
 build:
@@ -16,7 +16,7 @@ build.if:
 	fi
 
 run: build.if
-	@docker run --rm timezones-cli $(cmd)
+	@docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli $(cmd)
 
 clean: # Clean temporary files
 	@rm -rf $(TMP_PATH) __pycache__ .pytest_cache
