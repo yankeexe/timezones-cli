@@ -166,14 +166,14 @@ Create a config file manually first.
 ```bash
 $ touch ~/.tz-cli
 
-$ docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli search us
+$ docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli ghcr.io/yankeexe/timezones-cli search us
 ```
 For convenience you can add alias of the command to your shell config:
 ```bash
-$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli'" >> ~/.bashrc
+$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli ghcr.io/yankeexe/timezones-cli'" >> ~/.bashrc
 $ source ~/.bashrc
 
-$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli'" >> ~/.zshrc
+$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli ghcr.io/yankeexe/timezones-cli'" >> ~/.zshrc
 $ source ~/.zshrc
 
 # Use alias to invoke timezones-cli
