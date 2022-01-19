@@ -161,6 +161,12 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 docker pull ghcr.io/yankeexe/timezones-cli:latest
 ```
 
+Verify signature of the image: requires [cosign](https://docs.sigstore.dev/cosign/installation/).
+
+```bash
+COSIGN_EXPERIMENTAL=true cosign verify ghcr.io/yankeexe/timezones-cli:latest
+```
+
 Create a config file manually first.
 
 ```bash
