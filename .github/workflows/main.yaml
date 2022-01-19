@@ -1,4 +1,4 @@
-name: timezones-cli
+name: Linter
 
 on:
   push:
