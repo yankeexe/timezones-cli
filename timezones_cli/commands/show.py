@@ -22,6 +22,8 @@ from timezones_cli.utils import console, get_local_time, get_system_time
 def show(toggle: bool):
     """
     Show time based on the defaults at .tz-cli file.
+
+    $ tz show
     """
     check_config: Union[List, bool] = check_configuration()
 

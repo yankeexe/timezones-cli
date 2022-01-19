@@ -6,8 +6,7 @@ from typing import List
 
 import click
 
-from timezones_cli.utils import (check_config, console, validate_timezone,
-                                 variables)
+from timezones_cli.utils import check_config, console, validate_timezone, variables
 
 
 @click.command()

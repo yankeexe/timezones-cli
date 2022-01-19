@@ -22,6 +22,15 @@ console = Console()
     is_flag=True,
 )
 def get(query: str, toggle: bool):
+    """
+    Get timezone data based on timezone shortcodes.
+
+    $ tz get pst
+
+    $ tz get ist
+
+    $ tz get jst
+    """
     now = dt.utcnow()
     tz_abbrev = lambda tz: ZoneInfo(tz).tzname(now)
     tz_map = defaultdict(list)

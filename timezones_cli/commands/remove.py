@@ -5,8 +5,12 @@ from typing import Optional
 
 import click
 
-from timezones_cli.utils import (console, print_help_msg, remove_timezone,
-                                 validate_timezone)
+from timezones_cli.utils import (
+    console,
+    print_help_msg,
+    remove_timezone,
+    validate_timezone,
+)
 
 
 @click.command()
@@ -20,6 +24,10 @@ from timezones_cli.utils import (console, print_help_msg, remove_timezone,
 def remove(name: Optional[str], interactive: bool):
     """
     Remove timezone to the config file.
+
+    $ tz remove "Asia/Kolkata"
+
+    $ tz remove -i
     """
     exists = interactive or name
 

@@ -3,9 +3,13 @@ import typing as t
 import click
 import pycountry
 
-from timezones_cli.utils import (console, extract_fuzzy_country_data,
-                                 get_local_time, get_timezones,
-                                 handle_interaction)
+from timezones_cli.utils import (
+    console,
+    extract_fuzzy_country_data,
+    get_local_time,
+    get_timezones,
+    handle_interaction,
+)
 
 
 @click.command()
@@ -21,6 +25,10 @@ from timezones_cli.utils import (console, extract_fuzzy_country_data,
 def search(query: str, toggle: bool):
     """
     Get time based on the entered timezone.
+
+    $ tz search US
+
+    $ tz search Africa
     """
     try:
         # Search with user query.

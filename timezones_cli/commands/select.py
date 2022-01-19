@@ -3,8 +3,7 @@ Sub command to select timezone from config file.
 """
 import click
 
-from timezones_cli.utils import (console, get_local_time, handle_interaction,
-                                 variables)
+from timezones_cli.utils import console, get_local_time, handle_interaction, variables
 
 
 @click.command()
@@ -19,6 +18,8 @@ from timezones_cli.utils import (console, get_local_time, handle_interaction,
 def select(toggle: bool):
     """
     Interactively select the timezone from your config file to get local time.
+
+    $ tz select
     """
     config_file = variables.config_file
     entry = []
