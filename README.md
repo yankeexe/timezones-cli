@@ -23,7 +23,7 @@
 - [</details>](#details-1)
   - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
   - [Get UTC time](#get-utc-time)
-- [Run using Docker (WIP)](#run-using-docker-wip)
+- [Run using Docker :whale:](#run-using-docker-whale)
 - [Contributing](#contributing)
 
 ## Usage
@@ -155,8 +155,7 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 <img src = "https://i.imgur.com/8hjy1XP.gif" width="500" alt="demo of timezone cli select" />
 </details>
 
-## Run using Docker (WIP)
-> Note: Upload to Docker Hub.
+## Run using Docker :whale:
 
 Create a config file manually first.
 
@@ -165,6 +164,19 @@ $ touch ~/.tz-cli
 
 $ docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli search us
 ```
+For convenience you can add alias of the command to your shell config:
+```bash
+$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli'" >> ~/.bashrc
+$ source ~/.bashrc
+
+$ echo "alias tz='docker run --rm -it -v ${HOME}/.tz-cli:/home/tz/.tz-cli timezones-cli'" >> ~/.zshrc
+$ source ~/.zshrc
+
+# Use alias to invoke timezones-cli
+$ tz search Nepal
+```
+
+---
 
 For local debugging: Use the `make run` command followed by the command you want to run against the `tz` binary.
 
