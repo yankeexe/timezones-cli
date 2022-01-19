@@ -157,6 +157,10 @@ $ tz utc "11:45PM" "Asia/Kathmandu"
 
 ## Run using Docker :whale:
 
+```bash
+docker pull ghcr.io/yankeexe/timezones-cli:latest
+```
+
 Create a config file manually first.
 
 ```bash
