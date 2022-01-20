@@ -2,9 +2,9 @@
 
 <p>Get local datetime from multiple timezones.</p>
 <p>
-<img src="https://img.shields.io/pypi/v/timezones-cli" />
-<img src="https://img.shields.io/pypi/pyversions/timezones-cli" />
-<img src="https://img.shields.io/pypi/l/timezones-cli" />
+<img src="https://img.shields.io/pypi/v/timezones-cli?color=%2334D058" />
+<img src="https://img.shields.io/pypi/pyversions/timezones-cli?color=%2334D058" />
+<img src="https://img.shields.io/pypi/l/timezones-cli?color=%2334D058" />
 </p>
 <br>
 
