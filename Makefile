@@ -22,6 +22,7 @@ clean: # Clean temporary files
 	@rm -rf $(TMP_PATH) __pycache__ .pytest_cache
 	@find . -name '*.pyc' -delete
 	@find . -name '__pycache__' -delete
+	@rm -rf build dist
 
 test: # Run pytest
 	@pytest -vvv
