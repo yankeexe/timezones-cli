@@ -16,7 +16,7 @@ requirements = [
 
 # Development Requirements
 requirements_dev = [
-    "pytest<=4.*",
+    "pytest>=6.2.5",
     "black<=20.8b1",
     "pre-commit",
     "mypy",
