@@ -2,9 +2,9 @@
 import pytest
 
 from timezones_cli import utils
-from tests.fixtures import country_data
 
 
+@pytest.mark.usefixtures("country_data")
 def test_extract_fuzzy_country_data(country_data):
     """
     Test the extraction of data returned by fuzzy search.

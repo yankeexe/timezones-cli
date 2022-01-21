@@ -1,9 +1,10 @@
 """ pytest fixtures """
 from collections import namedtuple
+
 import pytest
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def country_data():
     Country = namedtuple(
         "Country", ["alpha_2", "alpha_3", "name", "numeric", "official_name"]
