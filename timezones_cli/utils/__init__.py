@@ -4,17 +4,16 @@ import re
 import sys
 from datetime import datetime
 from datetime import time as time_obj
-from datetime import timezone
 from typing import Any, List, NamedTuple, Optional, Tuple, Union
 
 import click
 import pycountry
 import pytz
+import tzlocal
 from rich.console import Console
 from simple_term_menu import TerminalMenu
 from tabulate import tabulate
 from thefuzz import process
-from tzlocal import get_localzone
 
 from timezones_cli.utils import variables
 from timezones_cli.utils.abbreviations import TIMEZONES
@@ -70,7 +69,7 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
         # Check timezone existence in non-interactive mode.
         if entry not in data:
             console.print(
-                f"Timezone not found in your config file.:x:", style="bold red"
+                "Timezone not found in your config file.:x:", style="bold red"
             )
             sys.exit()
 
@@ -280,12 +279,11 @@ def get_local_utc_time():
     time = datetime.now().time().strftime("%H:%M %p")
     dt = datetime.utcnow()
     utc_time = dt.strftime("%H:%M %p")
-    timezone = get_localzone().zone
+    timezone = tzlocal.get_localzone().zone
 
     console.print(
         tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
     )
-    sys.exit()
 
 
 def match_fuzzy(query):

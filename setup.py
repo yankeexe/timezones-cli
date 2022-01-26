@@ -11,7 +11,7 @@ requirements = [
     "pycountry",
     "pytz",
     "simple-term-menu",
-    "tzlocal",
+    "tzlocal==2.1",
     "thefuzz[speedup]",
 ]
 
@@ -21,6 +21,8 @@ requirements_dev = [
     "black<=20.8b1",
     "pre-commit",
     "mypy",
+    "freezegun",
+    "flake8",
 ]
 
 setuptools.setup(
