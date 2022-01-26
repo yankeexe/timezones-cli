@@ -1,6 +1,7 @@
 FROM python:3.9-slim-buster as build
 
-RUN useradd -ms /bin/bash tz
+RUN apt-get update && apt install -y gcc && \
+    useradd -ms /bin/bash tz
 
 USER tz
 
@@ -8,8 +9,7 @@ WORKDIR /home/tz
 
 COPY --chown=tz:tz . .
 
-RUN python setup.py bdist_wheel
-
+RUN pip install --no-cache-dir --user .
 
 FROM python:3.9-alpine
 
@@ -24,8 +24,6 @@ WORKDIR /home/tz
 
 ENV PATH=$PATH:/home/tz/.local/bin
 
-COPY --from=build --chown=tz /home/tz/dist /home/tz/dist/
-
-RUN pip install --no-cache-dir --user dist/*.whl
+COPY --from=build --chown=tz /home/tz/.local /home/tz/.local/
 
 ENTRYPOINT [ "tz" ]
