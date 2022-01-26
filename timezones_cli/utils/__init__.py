@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 from datetime import time as time_obj
 from datetime import timezone
-from typing import List, NamedTuple, Optional, Tuple, Union
+from typing import Any, List, NamedTuple, Optional, Tuple, Union
 
 import click
 import pycountry
@@ -13,6 +13,7 @@ import pytz
 from rich.console import Console
 from simple_term_menu import TerminalMenu
 from tabulate import tabulate
+from thefuzz import process
 from tzlocal import get_localzone
 
 from timezones_cli.utils import variables
@@ -122,7 +123,7 @@ def extract_fuzzy_country_data(
     return name, official_name, alpha_2, alpha_3
 
 
-def get_local_time(timezones: List, query: Optional[str] = None, toggle=False):
+def get_local_time(timezones: List[Any], query: Optional[str] = None, toggle=False):
     """
     Get localtime based on passed timezones.
     """
@@ -285,3 +286,28 @@ def get_local_utc_time():
         tabulate([(timezone, time, utc_time)], headers, tablefmt="fancy_grid")
     )
     sys.exit()
+
+
+def match_fuzzy(query):
+    timezones = []
+    all_timezones = list(pytz.all_timezones)
+    matches = process.extractBests(query, all_timezones)
+
+    for match in matches:
+        if match[1] >= 75:
+            timezones.append(match[0])
+
+    return timezones
+
+
+def query_handler(query: str) -> List:
+    timezones = match_fuzzy(query)
+
+    if len(query) in (2, 3) or not timezones:
+        data: List = pycountry.countries.search_fuzzy(query)
+        # extract alpha2 value
+        _, _, alpha_2, _ = extract_fuzzy_country_data(data)
+        # Get a list of timezone names.
+        timezones = get_timezones(alpha_2)
+
+    return timezones

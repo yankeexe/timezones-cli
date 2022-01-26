@@ -41,11 +41,14 @@ To run this CLI using Docker, check [Run using Docker :whale:](#run-using-docker
 ### Search for local date time
 
 You can use short country code like 'AE', 'RU', 'US' and so on.
+You can search via city like: 'Paris', 'London', 'Moscow', 'Chicago' and so on.
 
 ```bash
 $ tz search "us"
 
 $ tz search "Nepal"
+
+$ tz search "Paris"
 ```
 
 <details><summary><strong>Demo</strong></summary>

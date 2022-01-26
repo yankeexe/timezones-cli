@@ -12,6 +12,7 @@ requirements = [
     "pytz",
     "simple-term-menu",
     "tzlocal",
+    "thefuzz[speedup]",
 ]
 
 # Development Requirements
@@ -29,9 +30,7 @@ setuptools.setup(
     url="https://github.com/yankeexe/timezones-cli",
     description="Get local datetime from multiple timezones!",
     license="MIT",
-    packages=setuptools.find_packages(
-        exclude=["dist", "build", "*.egg-info", "tests"]
-    ),
+    packages=setuptools.find_packages(exclude=["dist", "build", "*.egg-info", "tests"]),
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=requirements,
