@@ -1,13 +1,13 @@
 import typing as t
 
 import click
-import pycountry
-import pytz
-from thefuzz import process
 
-from timezones_cli.utils import (console, extract_fuzzy_country_data,
-                                 get_local_time, get_timezones,
-                                 handle_interaction, query_handler)
+from timezones_cli.utils import (
+    console,
+    get_local_time,
+    handle_interaction,
+    query_handler,
+)
 
 
 @click.command()

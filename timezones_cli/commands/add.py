@@ -6,8 +6,7 @@ from typing import List
 
 import click
 
-from timezones_cli.utils import (check_config, console, validate_timezone,
-                                 variables)
+from timezones_cli.utils import check_config, console, validate_timezone, variables
 
 
 @click.command()
@@ -20,7 +19,7 @@ def add(timezone: str):
     config_file = variables.config_file
 
     if not check_config():
-        with open(config_file, "w+") as newfile:
+        with open(config_file, "w+"):
             pass
 
     with open(config_file, "r+") as file:

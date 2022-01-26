@@ -3,7 +3,6 @@ from datetime import datetime as dt
 from zoneinfo import ZoneInfo, available_timezones
 
 import click
-from click.core import Option
 from rich.console import Console
 
 from timezones_cli.utils import get_local_time
