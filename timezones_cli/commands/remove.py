@@ -5,12 +5,8 @@ from typing import Optional
 
 import click
 
-from timezones_cli.utils import (
-    console,
-    print_help_msg,
-    remove_timezone,
-    validate_timezone,
-)
+from timezones_cli.utils import (console, print_help_msg, remove_timezone,
+                                 validate_timezone)
 
 
 @click.command()
