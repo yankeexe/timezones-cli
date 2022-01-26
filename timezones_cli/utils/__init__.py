@@ -137,7 +137,7 @@ def get_local_time(timezones: List[Any], query: Optional[str] = None, toggle=Fal
         rows.append(
             (
                 TIMEZONES.get(query, zone),
-                time_data.strftime(f"%B %Y %A %{hours}:%M:%S %p"),
+                time_data.strftime(f"%A, %B %d, %Y | %{hours}:%M:%S %p"),
             )
         )
 
