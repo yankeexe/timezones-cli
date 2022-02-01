@@ -30,14 +30,12 @@ def search(query: str, toggle: bool):
     """
     try:
         result = query_handler(query)
-        payload: t.List = []
 
         # If length is greater than one, show terminal menu.
         if isinstance(result, t.List) and len(result) > 1:
-            entry = handle_interaction(result)
+            entries = handle_interaction(result)
 
-            payload.append(entry)
-            return get_local_time(payload, toggle=toggle)
+            return get_local_time(entries, toggle=toggle)
     except LookupError:
         return console.print(
             "Couldn't resolve your query, please try other keywords.:x:"

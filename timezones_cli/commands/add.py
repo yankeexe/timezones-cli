@@ -6,16 +6,29 @@ from typing import List
 
 import click
 
-from timezones_cli.utils import check_config, console, validate_timezone, variables
+from timezones_cli.utils import (
+    check_config,
+    console,
+    handle_interaction,
+    query_handler,
+    variables,
+)
 
 
 @click.command()
-@click.argument("timezone")
-def add(timezone: str):
+@click.argument("query")
+def add(query: str):
     """
     Add timezone to the config file.
     """
-    validate_timezone(timezone)
+    added_timezones = []
+    existing_timezones = []
+    line_break = "\n"
+    timezones = query_handler(query)
+
+    if len(timezones) > 1:
+        timezones = handle_interaction(timezones)
+
     config_file = variables.config_file
 
     if not check_config():
@@ -25,16 +38,24 @@ def add(timezone: str):
     with open(config_file, "r+") as file:
         data: List = [line.rstrip() for line in file]
 
-        if timezone in data:
-            return console.print(
-                f"[bold green]Timezone already exists:[/bold green] [bold red]{timezone}:x:[/bold red]"
+        for timezone in timezones:
+            if timezone in data:
+                existing_timezones.append(f"[bold red]{timezone}:x:[/bold red]")
+                continue
+
+            file.read()
+            # Add to the end of the file.
+            file.write(f"{timezone}\n")
+            added_timezones.append(
+                f"[bold blue]{timezone}[/bold blue] :white_check_mark:"
             )
 
-        # Read file
-        file.read()
-
-        # Add to the end of the file.
-        file.write(f"{timezone}\n")
+    if existing_timezones:
         console.print(
-            f"[bold green]New timezone added successfully:[/bold green] [bold blue]{timezone}[/bold blue] :white_check_mark:"
+            f"[bold yellow]Timezone/s already exists:[/bold yellow]\n{line_break.join(existing_timezones)}"
+        )
+
+    if added_timezones:
+        console.print(
+            f"[bold green]New timezone/s added successfully:[/bold green]\n{line_break.join(added_timezones)}"
         )

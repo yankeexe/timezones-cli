@@ -22,14 +22,13 @@ def select(toggle: bool):
     $ tz select
     """
     config_file = variables.config_file
-    entry = []
 
     with open(config_file, "r+") as file:
         data = [line.rstrip() for line in file]
 
-        if not len(data):
+        if not data:
             return console.print("Config file contains no timezone:x:")
 
-        entry.append(handle_interaction(data))
+        entries = handle_interaction(data)
 
-        return get_local_time(entry, toggle=toggle)
+        return get_local_time(entries, toggle=toggle)

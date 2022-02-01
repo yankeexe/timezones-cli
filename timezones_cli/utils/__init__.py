@@ -42,67 +42,85 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
     """
     config_file: str = variables.config_file
     entry: Optional[str]
+    removed_timezones = []
+    add_prompt = "Use `tz add` to create and add timezone to your config file.:memo:"
 
     if not check_config():
         console.print(
             "No configuration file found in your system.:x:\n",
             style="bold red",
         )
-        console.print(
-            "Use `tz add` to create and add timezone to your config file.:memo:",
-            style="bold green",
-        )
+        console.print(add_prompt, style="bold green")
         sys.exit()
 
     with open(config_file, "r+") as file:
         data: List = [line.rstrip() for line in file]
 
-        if not len(data):
+        if not data:
             console.print("Config file contains no timezone:x:", style="bold red")
             sys.exit()
 
         if interactive:
-            entry = handle_interaction(data)
+            entries = handle_interaction(data)
         else:
-            entry = name
-
-        # Check timezone existence in non-interactive mode.
-        if entry not in data:
-            console.print(
-                "Timezone not found in your config file.:x:", style="bold red"
-            )
-            sys.exit()
+            entries = [name]
 
         # Clear file content.
         file.seek(0)
         file.truncate(0)
 
-        for line in data:
-            if not line == entry:
-                file.write(f"{line}\n")
+        for entry in entries:
+            # Check timezone existence in non-interactive mode.
+            if entry not in data:
+                console.print(
+                    f"Timezone {entry} not found in your config file.:x:",
+                    style="bold red",
+                )
 
+            data.remove(entry)
+            removed_timezones.append(
+                f"[bold blue]{entry}[/bold blue] :white_check_mark:"
+            )
+
+        line_break = "\n"
         console.print(
-            f"[bold green]Timezone removed:[bold green] [bold blue]{entry}[/bold blue] :white_check_mark:"
+            f"[bold green]Timezone removed:[bold green]\n{line_break.join(removed_timezones)}"
         )
 
+        if not data:
+            console.print(
+                f"\n[bold red]No timezones in config.[/bold red]\n{add_prompt}",
+                style="bold green",
+            )
+            sys.exit(0)
 
-def handle_interaction(data: List) -> str:
+        [file.write(f"{line}\n") for line in data]
+
+
+def handle_interaction(data: List, multi_select=True) -> List[str]:
     """
     Display interactive menu on the terminal.
     """
+    selections = []
     try:
-        terminal_menu = TerminalMenu(data)
-        menu_entry_index: Optional[int] = terminal_menu.show()
+        terminal_menu = TerminalMenu(
+            data, multi_select=multi_select, show_multi_select_hint=multi_select
+        )
+        menu_entry_index: Optional[Tuple] = terminal_menu.show()
 
         # Check for None value when user presses `esc` or `ctrl + c`
         if menu_entry_index is None:
             raise KeyboardInterrupt
 
+        # if more than one timezone is selected.
+        for index in menu_entry_index:
+            selections.append(data[index])
+
     except KeyboardInterrupt:
         console.print("Exit:x:")
         sys.exit()
 
-    return data[menu_entry_index]
+    return selections
 
 
 def extract_fuzzy_country_data(
@@ -286,12 +304,15 @@ def get_local_utc_time():
     )
 
 
-def match_fuzzy(query):
+def match_fuzzy(query) -> List[str]:
     timezones = []
     all_timezones = list(pytz.all_timezones)
     matches = process.extractBests(query, all_timezones)
 
     for match in matches:
+        if match[1] == 100:
+            return [match[0]]
+
         if match[1] >= 75:
             timezones.append(match[0])
 
