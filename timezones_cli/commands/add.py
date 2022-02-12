@@ -24,7 +24,13 @@ def add(query: str):
     added_timezones = []
     existing_timezones = []
     line_break = "\n"
-    timezones = query_handler(query)
+
+    try:
+        timezones = query_handler(query)
+    except LookupError:
+        return console.print(
+            "Couldn't resolve your query, please try other keywords.:x:"
+        )
 
     if len(timezones) > 1:
         timezones = handle_interaction(timezones)
