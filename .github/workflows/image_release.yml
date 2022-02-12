@@ -23,7 +23,7 @@ jobs:
       - name: Install cosign
         uses: sigstore/cosign-installer@main
         with:
-          cosign-release: 'v1.4.1'
+          cosign-release: 'v1.5.1'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
