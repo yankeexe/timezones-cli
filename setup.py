@@ -13,6 +13,7 @@ requirements = [
     "simple-term-menu",
     "tzlocal==2.1",
     "thefuzz[speedup]",
+    "backports.zoneinfo",
 ]
 
 # Development Requirements
@@ -27,7 +28,7 @@ requirements_dev = [
 
 setuptools.setup(
     name="timezones_cli",
-    version="0.3.1",
+    version="0.3.2",
     author="Yankee Maharjan",
     url="https://github.com/yankeexe/timezones-cli",
     description="Get local datetime from multiple timezones!",

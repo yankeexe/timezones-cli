@@ -1,11 +1,16 @@
 from collections import defaultdict
 from datetime import datetime as dt
-from zoneinfo import ZoneInfo, available_timezones
 
 import click
 from rich.console import Console
 
 from timezones_cli.utils import get_local_time
+
+try:
+    from zoneinfo import ZoneInfo, available_timezones
+except ImportError:
+    from backports.zoneinfo import ZoneInfo, available_timezones
+
 
 console = Console()
 
