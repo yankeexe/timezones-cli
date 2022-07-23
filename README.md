@@ -10,7 +10,7 @@
 
 <img src="https://i.imgur.com/JIt8tQN.png"  width="500" />
 
-## What can you do with `timezones-cli`? :zap:
+## What can you do with `timezones-cli`? :sparkles:
 - Search for date and time based on city, country, or timezones.
 - Manage dashboard for timezones you frequently view.
 - Get UTC date and time based on your local timezone or any timezones.
