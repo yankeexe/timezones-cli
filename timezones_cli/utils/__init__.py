@@ -104,7 +104,11 @@ def handle_interaction(data: List, multi_select=True) -> List[str]:
     selections = []
     try:
         terminal_menu = TerminalMenu(
-            data, multi_select=multi_select, show_multi_select_hint=multi_select
+            data,
+            multi_select=multi_select,
+            show_multi_select_hint=multi_select,
+            search_key=None,
+            show_search_hint=True,
         )
         menu_entry_index: Optional[Tuple] = terminal_menu.show()
 
