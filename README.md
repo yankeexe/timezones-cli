@@ -1,20 +1,19 @@
 <img src="https://i.imgur.com/ZebplfT.png" width="110" align="left"/><h1>Timezones CLI</h1>
 
-<p>Get local datetime from multiple timezones.</p>
+<p><strong>CLI toolkit for timezones:zap:</strong></p>
 <p>
 <img src="https://img.shields.io/pypi/v/timezones-cli?color=%2334D058" />
 <img src="https://img.shields.io/pypi/pyversions/timezones-cli?color=%2334D058" />
 <img src="https://img.shields.io/pypi/l/timezones-cli?color=%2334D058" />
 </p>
 
-**All datetimes you care for, at a glance.**
 
 <img src="https://i.imgur.com/JIt8tQN.png"  width="500" />
 
 ## What can you do with `timezones-cli`? :zap:
-- Search for time and date based on city, country, or timezones.
+- Search for date and time based on city, country, or timezones.
 - Manage dashboard for timezones you frequently view.
-- Get UTC time and date based on your local timezone or any timezones.
+- Get UTC date and time based on your local timezone or any timezones.
 
 ## Contents
 
