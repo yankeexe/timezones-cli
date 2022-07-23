@@ -6,11 +6,17 @@
 <img src="https://img.shields.io/pypi/pyversions/timezones-cli?color=%2334D058" />
 <img src="https://img.shields.io/pypi/l/timezones-cli?color=%2334D058" />
 </p>
-<br>
 
 **All datetimes you care for, at a glance.**
 
 <img src="https://i.imgur.com/JIt8tQN.png"  width="500" />
+
+## What can you do with `timezones-cli`? :zap:
+- Search for time and date based on city, country, or timezones.
+- Manage dashboard for timezones you frequently view.
+- Get UTC time and date based on your local timezone or any timezones.
+
+## Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
