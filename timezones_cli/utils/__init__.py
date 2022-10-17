@@ -4,12 +4,13 @@ import re
 import sys
 from datetime import datetime
 from datetime import time as time_obj
-from typing import Any, List, NamedTuple, Optional, Tuple, Union
+from typing import Any, List, NamedTuple, Optional, Tuple, TypeVar, Union
 
 import click
 import pycountry
 import pytz
 import tzlocal
+from click.core import Command
 from rich.console import Console
 from simple_term_menu import TerminalMenu
 from tabulate import tabulate
@@ -41,7 +42,7 @@ def remove_timezone(interactive: bool, name: Optional[str] = None):
     Remove timezones based on the argument.
     """
     config_file: str = variables.config_file
-    entry: Optional[str]
+    entry: List[str]
     removed_timezones = []
     add_prompt = "Use `tz add` to create and add timezone to your config file.:memo:"
 
@@ -136,10 +137,10 @@ def extract_fuzzy_country_data(
     """
     country_data: NamedTuple = fuzzy_result[0]
 
-    name: str = getattr(country_data, "name", None)
-    alpha_2: str = getattr(country_data, "alpha_2", None)
-    alpha_3: str = getattr(country_data, "alpha_3", None)
-    official_name: str = getattr(country_data, "official_name", None)
+    name: Optional[str] = getattr(country_data, "name", None)
+    alpha_2: Optional[str] = getattr(country_data, "alpha_2", None)
+    alpha_3: Optional[str] = getattr(country_data, "alpha_3", None)
+    official_name: Optional[str] = getattr(country_data, "official_name", None)
 
     return name, official_name, alpha_2, alpha_3
 
@@ -213,7 +214,7 @@ def validate_timezone(timezone: str) -> bool:
     return True
 
 
-def print_help_msg(command):
+def print_help_msg(command: Command):
     """
     Get help message.
     """
@@ -238,8 +239,8 @@ def validate_time(time: str) -> Tuple[int, int, str]:
     minute = time_break_down[1]
 
     # Find integer value from the provided time string.
-    _minute = re.findall(r"-?\d+\.?\d*", minute)
-    _hour = re.findall(r"-?\d+\.?\d*", hour)
+    _minute: List[str] = re.findall(r"-?\d+\.?\d*", minute)
+    _hour: List[str] = re.findall(r"-?\d+\.?\d*", hour)
 
     # Error if no integer value is provided for time.
     if not _minute or not _hour:

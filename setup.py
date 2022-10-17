@@ -24,6 +24,10 @@ requirements_dev = [
     "mypy",
     "freezegun",
     "flake8",
+    # types
+    "types-pytz",
+    "types-tzlocal",
+    "types-tabulate",
 ]
 
 setuptools.setup(
