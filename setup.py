@@ -5,12 +5,12 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 requirements = [
-    "click",
-    "tabulate",
+    "click==8.1.5",
+    "tabulate==0.9.0",
     "rich<=7.1.0",
-    "pycountry",
+    "pycountry==22.3.5",
     "pytz",
-    "simple-term-menu",
+    "simple-term-menu==1.6.1",
     "tzlocal==2.1",
     "thefuzz[speedup]",
     "backports.zoneinfo",
@@ -44,11 +44,12 @@ setuptools.setup(
     extras_require={"dev": requirements_dev},
     entry_points={"console_scripts": ["tz = timezones_cli.main:cli"]},
     classifiers=[
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable"
         "License :: OSI Approved :: MIT License",
     ],
 )
