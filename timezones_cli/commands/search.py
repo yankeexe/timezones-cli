@@ -22,11 +22,21 @@ from timezones_cli.utils import (
 )
 def search(query: str, toggle: bool):
     """
-    Get time based on the entered timezone.
+    Get time based on the entered timezone or country code
 
-    $ tz search US
+    - using country code (either 2 or 3 letters):
 
-    $ tz search Africa
+        $ tz search US
+
+        $ tz search USA
+
+    - using timezone:
+
+        $ tz search Asia/Kathmandu
+
+    - using fuzzy text: (example: Ireland)
+
+        $ tz search Irela
     """
     try:
         result = query_handler(query)

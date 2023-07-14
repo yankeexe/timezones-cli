@@ -27,13 +27,20 @@ console = Console()
 )
 def get(query: str, toggle: bool):
     """
-    Get timezone data based on timezone shortcodes.
+    Get timezone with timezone shortcodes.
 
     $ tz get pst
 
     $ tz get ist
 
     $ tz get jst
+
+    $ tz get cest
+
+    $ tz get +0543
+
+    $ tz get +05
+
     """
     now = dt.utcnow()
     tz_abbrev = lambda tz: ZoneInfo(tz).tzname(now)
@@ -42,7 +49,7 @@ def get(query: str, toggle: bool):
     for tz in available_timezones():
         tz_map[tz_abbrev(tz)].append(tz)
     tz_map = {k: sorted(v) for k, v in tz_map.items()}
-
+    breakpoint()
     try:
         data = tz_map[query.upper()]
         get_local_time([data[0]], query.upper(), toggle)
