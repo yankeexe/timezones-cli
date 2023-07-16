@@ -49,7 +49,6 @@ def get(query: str, toggle: bool):
     for tz in available_timezones():
         tz_map[tz_abbrev(tz)].append(tz)
     tz_map = {k: sorted(v) for k, v in tz_map.items()}
-    breakpoint()
     try:
         data = tz_map[query.upper()]
         get_local_time([data[0]], query.upper(), toggle)
