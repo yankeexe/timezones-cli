@@ -45,17 +45,25 @@ To run this CLI using Docker, check [Run using Docker :whale:](#run-using-docker
 
 ### Search for local date time
 
-You can use short country code like 'AE', 'RU', 'US' and so on.
+Get time based on the entered timezone or country code
 
-You can search via city like: 'Paris', 'London', 'Moscow', 'Chicago' and so on.
+- using country code (either 2 or 3 letters):
 
-```bash
-$ tz search "us"
+  ```bash
+    $ tz search US
 
-$ tz search "Nepal"
+    $ tz search USA
+  ```
 
-$ tz search "Paris"
-```
+- using timezone:
+  ```bash
+    $ tz search Asia/Kathmandu
+  ```
+
+- using fuzzy text: (example: Ireland)
+  ```bash
+    $ tz search Irela
+  ```
 
 <details><summary><strong>Demo</strong></summary>
 
@@ -64,16 +72,20 @@ $ tz search "Paris"
 
 ---
 
-### Search based on timezone abbreviations
+### Search based on timezone shortcodes
 
 ```bash
-$ tz get "pst"
+  $ tz get pst
 
-$ tz get "ist"
+  $ tz get ist
 
-$ tz get "est"
+  $ tz get jst
 
-$ tz get "cst"
+  $ tz get cest
+
+  $ tz get +0543
+
+  $ tz get +05
 ```
 
 <details><summary><strong>Demo</strong></summary>
