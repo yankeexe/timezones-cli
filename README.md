@@ -20,10 +20,9 @@
 - [Installation](#installation)
 - [Usage](#usage)
   - [Search for local date time](#search-for-local-date-time)
-  - [Search based on timezone abbreviations](#search-based-on-timezone-abbreviations)
   - [Add timezones](#add-timezones)
   - [Remove timezones](#remove-timezones)
-  - [Show local datetime of all saved timezones](#show-local-datetime-of-all-saved-timezones)
+  - [Show local datetime of saved timezones](#show-local-datetime-of-saved-timezones)
   - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
   - [Get UTC time](#get-utc-time)
 - [Run using Docker :whale:](#run-using-docker-whale)
@@ -65,32 +64,24 @@ Get time based on the entered timezone or country code
     $ tz search Irela
   ```
 
+- using timezone shortcodes (--zone or -z flag):
+  ```bash
+    $ tz search pst -z
+
+    $ tz search ist -z
+
+    $ tz search jst -z
+
+    $ tz search cest -z
+
+    $ tz search +0543 -z
+
+    $ tz search +05 -z
+  ```
+
 <details><summary><strong>Demo</strong></summary>
 
 <img src = "https://i.imgur.com/D2bcHG2.gif" width="700" alt="demo of timezone cli search" />
-</details>
-
----
-
-### Search based on timezone shortcodes
-
-```bash
-  $ tz get pst
-
-  $ tz get ist
-
-  $ tz get jst
-
-  $ tz get cest
-
-  $ tz get +0543
-
-  $ tz get +05
-```
-
-<details><summary><strong>Demo</strong></summary>
-
-<img src = "https://i.imgur.com/2xNhV08.gif" width="700" alt="demo of timezone cli search" />
 </details>
 
 ---
@@ -128,7 +119,7 @@ $ tz remove --name "Asia/Kathmandu"
 
 ---
 
-### Show local datetime of all saved timezones
+### Show local datetime of saved timezones
 
 ```bash
 $ tz show
