@@ -42,7 +42,7 @@ To run this CLI using Docker, check [Run using Docker :whale:](#run-using-docker
 
 ## Usage
 
-### Search for local date time
+### Search for timezones
 
 Get time based on the entered timezone or country code
 
@@ -86,7 +86,7 @@ Get time based on the entered timezone or country code
 
 ---
 
-### Add timezones
+### Add/save timezones
 
 Timezones added to the config file are treated as the default timezones which is triggered by the `tz show` command.
 
@@ -119,7 +119,7 @@ $ tz remove --name "Asia/Kathmandu"
 
 ---
 
-### Show local datetime of saved timezones
+### Show saved timezones
 
 ```bash
 $ tz show
