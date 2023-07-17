@@ -19,11 +19,11 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Search for local date time](#search-for-local-date-time)
-  - [Add timezones](#add-timezones)
+  - [Search for timezones](#search-for-timezones)
+  - [Add/save timezones](#addsave-timezones)
   - [Remove timezones](#remove-timezones)
-  - [Show local datetime of saved timezones](#show-local-datetime-of-saved-timezones)
-  - [Select a single timezone from defaults](#select-a-single-timezone-from-defaults)
+  - [Show saved timezones](#show-saved-timezones)
+  - [Select individual timezones from saved](#select-individual-timezones-from-saved)
   - [Get UTC time](#get-utc-time)
 - [Run using Docker :whale:](#run-using-docker-whale)
 - [Contributing](#contributing)
@@ -131,7 +131,7 @@ $ tz show
 </details>
 ---
 
-### Select a single timezone from defaults
+### Select individual timezones from saved
 
 ```bash
 $ tz select
