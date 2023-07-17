@@ -7,20 +7,26 @@ from timezones_cli.utils import (
     get_local_time,
     handle_interaction,
     query_handler,
+    tz_abbreviation_handler,
 )
+from timezones_cli.utils.validators import TzAbbrev
 
 
 @click.command()
-@click.argument("query")
+@click.argument("query", type=TzAbbrev())
+@click.option(
+    "--zone",
+    "-z",
+    help="define timezone short codes",
+    is_flag=True,
+)
 @click.option(
     "--toggle",
     "-t",
     help="Toggle for 24 hours format",
-    type=bool,
-    default=False,
     is_flag=True,
 )
-def search(query: str, toggle: bool):
+def search(query: str, zone: bool, toggle: bool):
     """
     Get time based on the entered timezone or country code
 
@@ -37,18 +43,33 @@ def search(query: str, toggle: bool):
     - using fuzzy text: (example: Ireland)
 
         $ tz search Irela
+
+    - using timezone shortcodes (--zone or -z flag):
+
+        $ tz search pst -z
+
+        $ tz search ist -z
+
+        $ tz search jst -z
+
+        $ tz search cest -z
+
+        $ tz search +0545 -z
+
+        $ tz search +05 -z
     """
     try:
-        result = query_handler(query)
+        if zone:
+            result = tz_abbreviation_handler(query)
+        else:
+            result = query_handler(query)
 
-        # If length is greater than one, show terminal menu.
-        if isinstance(result, t.List) and len(result) > 1:
-            entries = handle_interaction(result)
+            # If length is greater than one, show terminal menu.
+            if isinstance(result, t.List) and len(result) > 1:
+                result = handle_interaction(result)
 
-            return get_local_time(entries, toggle=toggle)
+        return get_local_time(result, query, toggle=toggle)
     except LookupError:
         return console.print(
             "Couldn't resolve your query, please try other keywords.:x:"
         )
-
-    return get_local_time(result, toggle=toggle)

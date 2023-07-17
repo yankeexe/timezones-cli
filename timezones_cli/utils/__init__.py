@@ -2,9 +2,10 @@
 import os
 import re
 import sys
+from collections import defaultdict
 from datetime import datetime
 from datetime import time as time_obj
-from typing import Any, List, NamedTuple, Optional, Tuple, TypeVar, Union
+from typing import Any, List, NamedTuple, Optional, Tuple, Union
 
 import click
 import pycountry
@@ -18,6 +19,12 @@ from thefuzz import process
 
 from timezones_cli.utils import variables
 from timezones_cli.utils.abbreviations import TIMEZONES
+
+try:
+    from zoneinfo import ZoneInfo, available_timezones
+except ImportError:
+    from backports.zoneinfo import ZoneInfo, available_timezones
+
 
 console = Console()
 
@@ -335,3 +342,14 @@ def query_handler(query: str) -> List:
         timezones = get_timezones(alpha_2)
 
     return timezones
+
+
+def tz_abbreviation_handler(query: str):
+    now = datetime.utcnow()
+    tz_abbrev = lambda tz: ZoneInfo(tz).tzname(now)
+    tz_map = defaultdict(list)
+
+    for tz in available_timezones():
+        tz_map[tz_abbrev(tz)].append(tz)
+    tz_map = {k: sorted(v) for k, v in tz_map.items()}
+    return [tz_map[query][0]]
