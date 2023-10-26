@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: "*"
+    types: ["opened"]
 
 jobs:
   Linter:
@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Black Lint
+      - name: Ruff Check Linting
         run: |
-          pip install black
-          black .
+          pip install ruff
+          ruff format --check .
