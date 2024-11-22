@@ -5,6 +5,7 @@
 <img src="https://img.shields.io/pypi/v/timezones-cli?color=%2334D058" />
 <img src="https://img.shields.io/pypi/pyversions/timezones-cli?color=%2334D058" />
 <img src="https://img.shields.io/pypi/l/timezones-cli?color=%2334D058" />
+<img src="https://static.pepy.tech/badge/timezones-cli" />
 </p>
 
 
