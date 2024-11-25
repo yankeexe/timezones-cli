@@ -1,4 +1,5 @@
 """ Utils for sub commands """
+
 import os
 import re
 import sys
@@ -6,6 +7,7 @@ from collections import defaultdict
 from datetime import datetime
 from datetime import time as time_obj
 from typing import Any, List, NamedTuple, Optional, Tuple, Union
+from zoneinfo import ZoneInfo, available_timezones
 
 import click
 import pycountry
@@ -19,12 +21,6 @@ from thefuzz import process
 
 from timezones_cli.utils import variables
 from timezones_cli.utils.abbreviations import TIMEZONES
-
-try:
-    from zoneinfo import ZoneInfo, available_timezones
-except ImportError:
-    from backports.zoneinfo import ZoneInfo, available_timezones
-
 
 console = Console()
 

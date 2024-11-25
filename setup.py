@@ -1,4 +1,5 @@
 """Package setup"""
+
 import setuptools
 
 with open("README.md", "r") as f:
@@ -13,7 +14,6 @@ requirements = [
     "simple-term-menu==1.6.1",
     "tzlocal==2.1",
     "thefuzz[speedup]",
-    "backports.zoneinfo",
 ]
 
 # Development Requirements
@@ -44,7 +44,6 @@ setuptools.setup(
     extras_require={"dev": requirements_dev},
     entry_points={"console_scripts": ["tz = timezones_cli.main:cli"]},
     classifiers=[
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
