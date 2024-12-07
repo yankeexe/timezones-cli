@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster as build
+FROM  public.ecr.aws/docker/library/python:3.11.11-slim-bookworm AS build
 
 RUN apt-get update && apt install -y gcc && \
     useradd -ms /bin/bash tz
@@ -11,7 +11,8 @@ COPY --chown=tz:tz . .
 
 RUN pip install --no-cache-dir --user .
 
-FROM python:3.9-alpine
+
+FROM public.ecr.aws/docker/library/python:3.11.11-alpine
 
 LABEL description="Get local datetime from multiple timezones!"
 
