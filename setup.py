@@ -32,7 +32,7 @@ requirements_dev = [
 
 setuptools.setup(
     name="timezones_cli",
-    version="0.3.3",
+    version="0.3.4",
     author="Yankee Maharjan",
     url="https://github.com/yankeexe/timezones-cli",
     description="Get local datetime from multiple timezones!",
@@ -48,7 +48,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
-        "Development Status :: 5 - Production/Stable"
         "License :: OSI Approved :: MIT License",
     ],
 )
