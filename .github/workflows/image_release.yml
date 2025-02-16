@@ -23,7 +23,7 @@ jobs:
       - name: Install cosign
         uses: sigstore/cosign-installer@main
         with:
-          cosign-release: 'v1.5.1'
+          cosign-release: 'v3.8.0'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -56,5 +56,4 @@ jobs:
 
       - name: Sign the container image
         env:
-          COSIGN_EXPERIMENTAL: "true"
-        run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push-step.outputs.digest }}
+        run: cosign sign --yes ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.push-step.outputs.digest }}
