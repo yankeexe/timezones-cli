@@ -1,4 +1,5 @@
 """ Entrypoint of the CLI """
+
 import click
 
 from timezones_cli.commands import add, remove, search, select, show, utc

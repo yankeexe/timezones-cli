@@ -1,6 +1,7 @@
 """
 Sub command to select timezone from config file.
 """
+
 import click
 
 from timezones_cli.utils import console, get_local_time, handle_interaction, variables

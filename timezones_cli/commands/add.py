@@ -12,6 +12,7 @@ from timezones_cli.utils import (
     handle_interaction,
     query_handler,
     variables,
+    get_local_time,
 )
 
 
@@ -22,7 +23,9 @@ def add(query: str):
     Add timezone to the config file.
     """
     added_timezones = []
+    added_timezones_raw = []
     existing_timezones = []
+    existing_timezones_raw = []
     line_break = "\n"
 
     try:
@@ -46,22 +49,28 @@ def add(query: str):
 
         for timezone in timezones:
             if timezone in data:
-                existing_timezones.append(f"[bold red]{timezone}:x:[/bold red]")
+                existing_timezones.append(
+                    f"[bold green]{timezone}:white_check_mark:[/bold green]"
+                )
+                existing_timezones_raw.append(timezone)
                 continue
 
             file.read()
             # Add to the end of the file.
             file.write(f"{timezone}\n")
+            added_timezones_raw.append(timezone)
             added_timezones.append(
                 f"[bold blue]{timezone}[/bold blue] :white_check_mark:"
             )
 
     if existing_timezones:
         console.print(
-            f"[bold yellow]Timezone/s already exists:[/bold yellow]\n{line_break.join(existing_timezones)}"
+            f"[bold blue]🌐 Timezone/s already exists![/bold blue]\n{line_break.join(existing_timezones)}"
         )
+        return get_local_time(existing_timezones_raw)
 
     if added_timezones:
         console.print(
             f"[bold green]New timezone/s added successfully:[/bold green]\n{line_break.join(added_timezones)}"
         )
+        return get_local_time(added_timezones_raw)

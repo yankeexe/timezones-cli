@@ -1,6 +1,7 @@
 """
 Sub command to get UTC times
 """
+
 import sys
 
 import click

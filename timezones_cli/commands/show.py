@@ -1,6 +1,7 @@
 """
 Sub command to show datetime from saved timezones.
 """
+
 import sys
 from typing import List, Union
 

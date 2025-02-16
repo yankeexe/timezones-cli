@@ -1,6 +1,7 @@
 """
 Sub command to remove saved timezones from config file.
 """
+
 from typing import Optional
 
 import click

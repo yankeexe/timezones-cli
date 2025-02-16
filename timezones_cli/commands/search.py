@@ -67,7 +67,6 @@ def search(query: str, zone: bool, toggle: bool):
             # If length is greater than one, show terminal menu.
             if isinstance(result, t.List) and len(result) > 1:
                 result = handle_interaction(result)
-
         return get_local_time(result, query, toggle=toggle)
     except LookupError:
         return console.print(
