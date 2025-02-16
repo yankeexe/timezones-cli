@@ -2,10 +2,10 @@
 
 <p><strong>CLI toolkit for timezones:zap:</strong></p>
 <p>
-<img src="https://img.shields.io/pypi/v/timezones-cli?color=%2334D058" />
-<img src="https://img.shields.io/pypi/pyversions/timezones-cli?color=%2334D058" />
-<img src="https://img.shields.io/pypi/l/timezones-cli?color=%2334D058" />
-<img src="https://static.pepy.tech/badge/timezones-cli" />
+<img src="https://img.shields.io/pypi/v/timezones-cli?style=flat-square&color=black"/>
+<img src="https://img.shields.io/pypi/pyversions/timezones-cli?style=flat-square&color=black"/>
+<img src="https://img.shields.io/pypi/l/timezones-cli?style=flat-square&color=black"/>
+<img src="https://static.pepy.tech/badge/timezones-cli"/>
 </p>
 
 
