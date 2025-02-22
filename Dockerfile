@@ -1,5 +1,9 @@
 FROM  public.ecr.aws/docker/library/python:3.11.11-slim-bookworm AS build
 
+ENV UV_PROJECT_ENVIRONMENT=/home/tz/.venv
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
 RUN <<eot
     set -ex
 
@@ -14,12 +18,19 @@ WORKDIR /home/tz
 
 COPY --chown=tz:tz . .
 
-RUN pip install --no-cache-dir --user .
+COPY --from=ghcr.io/astral-sh/uv:0.6.2 /uv /bin/
 
+RUN <<eot
+    set -ex
+
+    uv sync --frozen --no-dev --no-editable
+eot
 
 FROM public.ecr.aws/docker/library/python:3.11.11-alpine
 
 LABEL description="Get local datetime from multiple timezones!"
+
+ENV PATH="/home/tz/.venv/bin:/home/tz/.local/bin:$PATH"
 
 RUN <<eot
     set -ex
@@ -36,8 +47,6 @@ USER tz
 
 WORKDIR /home/tz
 
-ENV PATH=$PATH:/home/tz/.local/bin
-
-COPY --from=build --chown=tz /home/tz/.local /home/tz/.local/
+COPY --from=build --chown=tz:tz /home/tz/.venv /home/tz/.venv
 
 ENTRYPOINT [ "tz" ]
