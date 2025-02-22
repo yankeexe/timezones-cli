@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timezones_cli"
+version = "0.3.7"
+description = "Get local datetime from multiple timezones!"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Yankee Maharjan" }
+]
+urls = { homepage = "https://github.com/yankeexe/timezones-cli" }
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "click==8.1.5",
+    "tabulate==0.9.0",
+    "rich<=7.1.0",
+    "pycountry==22.3.5",
+    "pytz",
+    "simple-term-menu==1.6.1",
+    "tzlocal==2.1",
+    "thefuzz[speedup]",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.5",
+    "black<=20.8b1",
+    "pre-commit",
+    "mypy",
+    "freezegun",
+    "flake8",
+    "types-pytz",
+    "types-tzlocal",
+    "types-tabulate",
+]
+
+[project.scripts]
+tz = "timezones_cli.main:cli"
+
+[tool.setuptools.packages.find]
+exclude = ["dist", "build", "*.egg-info", "tests"]
