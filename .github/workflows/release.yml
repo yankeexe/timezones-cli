@@ -18,8 +18,14 @@ jobs:
         name: Install Dependencies
         run: pip install wheel
       -
+        name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.2"
+      -
         name: Build Distribution packages
-        run: python setup.py bdist_wheel
+        run: uv build --wheel
+
       -
         name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
