@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=75.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -46,5 +46,11 @@ dev = [
 [project.scripts]
 tz = "timezones_cli.main:cli"
 
-[tool.setuptools.packages.find]
-exclude = ["dist", "build", "*.egg-info", "tests"]
+[tool.setuptools]
+packages = ["timezones_cli"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["tests/*", "dist/*", "build/*", "*.egg-info/*"]
