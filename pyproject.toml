@@ -47,10 +47,19 @@ dev = [
 tz = "timezones_cli.main:cli"
 
 [tool.setuptools]
-packages = ["timezones_cli"]
+packages = [
+    "timezones_cli",
+    "timezones_cli.commands",
+    "timezones_cli.utils"
+]
 
 [tool.setuptools.package-data]
 "*" = ["py.typed"]
 
 [tool.setuptools.exclude-package-data]
 "*" = ["tests/*", "dist/*", "build/*", "*.egg-info/*"]
+
+[dependency-groups]
+build = [
+    "setuptools>=75.8.0",
+]

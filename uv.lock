@@ -643,6 +643,11 @@ dev = [
     { name = "types-tzlocal" },
 ]
 
+[package.dev-dependencies]
+build = [
+    { name = "setuptools" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = "<=20.8b1" },
@@ -664,6 +669,9 @@ requires-dist = [
     { name = "tzlocal", specifier = "==2.1" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+build = [{ name = "setuptools", specifier = ">=75.8.0" }]
 
 [[package]]
 name = "toml"
