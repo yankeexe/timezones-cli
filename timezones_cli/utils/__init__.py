@@ -149,7 +149,11 @@ def extract_fuzzy_country_data(
     return name, official_name, alpha_2, alpha_3
 
 
-def get_local_time(timezones: List[Any], query: Optional[str] = None, toggle=False):
+def get_local_time(
+    timezones: List[Any],
+    query: Optional[str] = None,
+    toggle=False,
+):
     """
     Get localtime based on passed timezones.
     """
