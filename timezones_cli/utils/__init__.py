@@ -3,6 +3,7 @@
 import os
 import re
 import sys
+import time
 from collections import defaultdict
 from datetime import datetime
 from datetime import time as time_obj
@@ -154,19 +155,31 @@ def get_local_time(timezones: List[Any], query: Optional[str] = None, toggle=Fal
     """
     hours = "H" if toggle else "I"
     headers: List = ["Timezone", "Local Datetime"]
-    rows: List = []
-    for zone in timezones:
-        validate_timezone(zone)
-        timezone = pytz.timezone(zone)
-        time_data = datetime.now(timezone)
-        rows.append(
-            (
-                TIMEZONES.get(query, zone),
-                time_data.strftime(f"%A, %B %d, %Y | %{hours}:%M:%S %p"),
-            )
-        )
 
-    console.print(tabulate(rows, headers, tablefmt="fancy_grid"))
+    try:
+        while True:
+            rows: List = []
+            for zone in timezones:
+                validate_timezone(zone)
+                timezone = pytz.timezone(zone)
+                time_data = datetime.now(timezone)
+                rows.append(
+                    (
+                        TIMEZONES.get(query, zone),
+                        time_data.strftime(f"%A, %B %d, %Y | %{hours}:%M:%S %p"),
+                    )
+                )
+
+            # Clear the console before printing new time
+            console.clear()
+            console.print(tabulate(rows, headers, tablefmt="fancy_grid"))
+
+            # Wait for 1 second before updating
+            time.sleep(1)
+
+    except KeyboardInterrupt:
+        console.print("\n:wave:", style="bold blue")
+        sys.exit(0)
 
 
 def get_system_time():
