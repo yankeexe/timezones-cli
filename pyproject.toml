@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "timezones_cli"
-version = "0.3.7"
+version = "0.3.8"
 description = "Get local datetime from multiple timezones!"
 readme = "README.md"
 license = { text = "MIT" }
