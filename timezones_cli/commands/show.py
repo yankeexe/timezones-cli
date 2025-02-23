@@ -7,11 +7,17 @@ from typing import List, Union
 
 import click
 
-from timezones_cli.utils import check_config as check_configuration
+from timezones_cli.utils import check_config as check_configuration, handle_interaction
 from timezones_cli.utils import console, get_local_time, get_system_time
 
 
 @click.command()
+@click.option(
+    "--interactive",
+    "-i",
+    help="Delete timezones in interactive mode.",
+    is_flag=True,
+)
 @click.option(
     "--toggle",
     "-t",
@@ -20,15 +26,15 @@ from timezones_cli.utils import console, get_local_time, get_system_time
     default=False,
     is_flag=True,
 )
-def show(toggle: bool):
+def show(interactive: bool, toggle: bool):
     """
     Show time based on the defaults at .tz-cli file.
 
     $ tz show
     """
-    check_config: Union[List, bool] = check_configuration()
+    timezone_data: Union[List, bool] = check_configuration()
 
-    if not check_config:
+    if not timezone_data:
         console.print(
             "File is empty or No configuration file is present in your system.:x:\n",
             style="bold red",
@@ -44,4 +50,7 @@ def show(toggle: bool):
         )
         sys.exit()
 
-    return get_local_time(check_config, toggle=toggle)
+    if interactive:
+        timezone_data = handle_interaction(timezone_data)
+
+    return get_local_time(timezone_data, toggle=toggle)
