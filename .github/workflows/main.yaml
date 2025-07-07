@@ -1,24 +1,22 @@
 name: Linter
-
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    types: ["opened"]
-
+    types:
+      - opened
 jobs:
   Linter:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
-
       - name: Ruff Check Linting
         run: |
           pip install ruff
-          ruff format --check .
+          ruff check .
