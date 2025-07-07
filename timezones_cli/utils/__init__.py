@@ -1,4 +1,4 @@
-""" Utils for sub commands """
+"""Utils for sub commands"""
 
 import os
 import re
@@ -357,9 +357,12 @@ def query_handler(query: str) -> List:
     return timezones
 
 
-def tz_abbreviation_handler(query: str):
+def tz_abbrev(tz):
     now = datetime.utcnow()
-    tz_abbrev = lambda tz: ZoneInfo(tz).tzname(now)
+    return ZoneInfo(tz).tzname(now)
+
+
+def tz_abbreviation_handler(query: str):
     tz_map = defaultdict(list)
 
     for tz in available_timezones():
