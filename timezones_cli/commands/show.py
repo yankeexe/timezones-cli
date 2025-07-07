@@ -7,8 +7,13 @@ from typing import List, Union
 
 import click
 
-from timezones_cli.utils import check_config as check_configuration, handle_interaction
-from timezones_cli.utils import console, get_local_time, get_system_time
+from timezones_cli.utils import check_config as check_configuration
+from timezones_cli.utils import (
+    console,
+    get_local_time,
+    get_system_time,
+    handle_interaction,
+)
 
 
 @click.command()
